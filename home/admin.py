@@ -6,4 +6,6 @@ from .models import *
 admin.site.register(Category)
 admin.site.register(SubCategory)
 admin.site.register(Item)
+admin.site.register(Slider)
+admin.site.register(Ad)
 

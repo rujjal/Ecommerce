@@ -41,4 +41,24 @@ class Item(models.Model):
 	def __str__(self):
 		return (self.title)
 
+class Slider(models.Model):
+	title = models.CharField(max_length = 300)
+	rank = models.IntegerField()
+	status = models.CharField(max_length = 300, choices = STATUS, default = False)
+	image = models.ImageField(upload_to = 'media', null = True)
+	description = models.TextField(blank = True)
+
+	def __str__(self):
+		return self.title
+
+class Ad(models.Model):
+	title = models.CharField(max_length = 300)
+	rank = models.IntegerField()
+	description = models.TextField(blank = True)
+	image = models.ImageField(upload_to = 'media')
+
+	def __str__(self):
+		return self.title
+
+
 
