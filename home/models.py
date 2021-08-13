@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+
 
 # Create your models here.
 
@@ -25,6 +27,9 @@ class SubCategory(models.Model):
 	def __str__(self):
 		return (self.title)
 
+	def get_subcat_url(self):
+		return reverse("home:subcategory", kwargs = {'slug':self.slug})
+
 class Item(models.Model):
 	title = models.CharField(max_length = 300)
 	category = models.ForeignKey(Category, on_delete = models.CASCADE)
@@ -40,6 +45,9 @@ class Item(models.Model):
 
 	def __str__(self):
 		return (self.title)
+
+	def get_productdetail_url(self):
+		return reverse("home:detail", kwargs = {'slug':self.slug})
 
 class Slider(models.Model):
 	title = models.CharField(max_length = 300)
@@ -59,6 +67,5 @@ class Ad(models.Model):
 
 	def __str__(self):
 		return self.title
-
 
 
