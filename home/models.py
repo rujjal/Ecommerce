@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.conf import settings
 
 
 # Create your models here.
@@ -49,6 +50,9 @@ class Item(models.Model):
 	def get_productdetail_url(self):
 		return reverse("home:detail", kwargs = {'slug':self.slug})
 
+	def get_cart_url(self):
+		return reverse("home:cart", kwargs = {'slug':self.slug})
+
 class Slider(models.Model):
 	title = models.CharField(max_length = 300)
 	rank = models.IntegerField()
@@ -79,4 +83,17 @@ class Review(models.Model):
 
 	def __str__(self):
 		return self.name
+
+
+class Cart(models.Model):
+	user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE)
+	slug = models.CharField(max_length = 200)
+	items = models.ForeignKey(Item, on_delete = models.CASCADE)
+	quantity = models.IntegerField(default = 1)
+	checkout = models.BooleanField(default = False)
+
+	def __str__(self):
+		return self.user.username
+
+	
 

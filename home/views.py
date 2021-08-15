@@ -97,3 +97,25 @@ class SearchView(BaseViews):
 		self.views['search_product'] = Item.objects.filter(title__icontains = query)
 
 		return render(request,'search.html', self.views)
+
+def cart(request,slug):
+	if Cart.objects.filter(slug = slug, checkout = False).exists():
+		quantity = Cart.objects.filter(slug = slug, checkout = False).quantity
+		quantity = quantity+1
+		Cart.objects.filter(slug = slug, checkout = False).update(quantity = quantity)
+	else:
+		username = request.user
+		data = Cart.objects.Create(
+			user = username,
+			slug = slug,
+			items = Item.objects.filter(slug = slug)
+			)
+		data.save()
+		return redirect('home:mycart')
+
+
+class CartView(BaseViews):
+	def get(self,request):
+		self.views['carts'] = Cart.objects.filter(user = request.user)
+
+		return render(request, 'cart.html', self.views)

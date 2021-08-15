@@ -10,4 +10,6 @@ urlpatterns = [
     path('search', SearchView.as_view(), name='search'),
     path('review', review, name='review'),
     path('signup', signup, name='signup'),
+    path('cart/<slug>', cart, name='cart'),
+    path('mycart', CartView.as_view(), name='mycart'),
 ]
