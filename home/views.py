@@ -88,3 +88,12 @@ def signup(request):
 			return redirect('home:signup')
 
 	return render(request,'signup.html')
+
+class SearchView(BaseViews):
+	def get(self,request):
+		query = request.GET.get('query')
+		if not query:
+			return redirect('/')
+		self.views['search_product'] = Item.objects.filter(title__icontains = query)
+
+		return render(request,'search.html', self.views)

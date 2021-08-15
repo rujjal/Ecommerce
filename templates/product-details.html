@@ -302,6 +302,7 @@
 									<p>{{rev.comment}}</p>
 									<p><b>Write Your Review</b></p>
 									{% endfor %}
+									{% if user.isauthenticated %}
 									<form  method = "POST" action="{% url 'home:review' %}">
 										{% csrf_token%}
 										<span>
@@ -312,9 +313,8 @@
 										<textarea name="" placeholder="Comment"></textarea>
 										<!-- <b>Rating: </b> <img src="images/product-details/rating.png" alt="" /> -->
 										<input type="submit" value="submit" class="btn btn-default pull-right">
-											
-										
 									</form>
+									{% endif %}
 								</div>
 								
 							</div>
