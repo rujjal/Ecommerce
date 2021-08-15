@@ -118,5 +118,4 @@ class CartView(BaseViews):
 	def get(self,request):
 		self.views['carts'] = Cart.objects.filter(user = request.user)
 
-
 		return render(request, 'cart.html', self.views)

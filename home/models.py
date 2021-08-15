@@ -92,6 +92,7 @@ class Cart(models.Model):
 	quantity = models.IntegerField(default = 1)
 	checkout = models.BooleanField(default = False)
 
+
 	def __str__(self):
 		return self.user.username
 
